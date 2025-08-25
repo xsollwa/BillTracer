@@ -1,31 +1,40 @@
 # BillTracer
 
-BillTracer is a lightweight tool for exploring how U.S. congressional bills evolve between different versions. It fetches two versions of a bill from **GovInfo** and produces a section-aware comparison in HTML with highlighted changes.
+BillTracer is a research tool for analyzing how congressional bills change as they move through the legislative process.  
+It fetches two different versions of a bill from **GovInfo** and produces a side-by-side, section-aware comparison in HTML.
 
-The output highlights **added**, **removed**, and **modified** text. It also tags likely **appropriations/funding**, **authority**, and **reporting** provisions so you can quickly see how funding and mandates change between drafts.
+The viewer highlights what text was **added**, **removed**, or **modified**, and applies simple heuristics to flag provisions related to **funding**, **authority**, and **reporting**. This makes it easier to trace how appropriations or mandates evolve between drafts.
+
+---
+
+## Why BillTracer?
+
+Legislation often undergoes substantial edits as it moves from introduction to enrollment. These edits may involve inserting new provisions, removing language, or modifying funding authorizations. Manually tracking those changes is tedious.  
+BillTracer automates this process and produces a clean, navigable report designed for policy analysis, research, and transparency.
 
 ---
 
 ## Features
 
-- Fetches bill text directly from [govinfo.gov](https://www.govinfo.gov/)
-- Compares any two versions (e.g., *Introduced → Enrolled*)
-- Section-aware diffing (`SEC.` sections, DIVISION/TITLE/SUBTITLE fallbacks)
-- Word-level redline with `<ins>` (inserted) and `<del>` (deleted) markup
-- Filters and search in the HTML viewer:
-  - Filter by Added, Removed, Modified, Funding, Authority, Reporting
-  - Toggle to show unchanged sections
-  - Search by section ID or text content
-- Top “likely funding changes” summary
-- Pure Python, no external dependencies beyond `requests`
+- **Automatic text retrieval**: Downloads bill text directly from [govinfo.gov](https://www.govinfo.gov/).
+- **Flexible comparisons**: Works with any two versions of a bill (e.g. *Introduced → Enrolled*).
+- **Section recognition**: Splits bills by `SEC.` sections when available, falling back on DIVISION/TITLE/SUBTITLE headers.
+- **Redlined output**: Word-level diffs using `<ins>` for insertions and `<del>` for deletions.
+- **Interactive viewer**:  
+  - Filter by Added, Removed, Modified, Funding, Authority, or Reporting  
+  - Search across section IDs and content  
+  - Toggle unchanged sections on/off
+- **Summary of funding changes**: Highlights sections most likely tied to appropriations.
+- **Lightweight**: Written in Python with no dependencies other than `requests`.
 
 ---
 
 ## Requirements
 
-- Python 3.9 or later  
-- The `requests` library  
+- Python 3.9 or newer  
+- `requests` library
 
-Install dependencies:
+Install with:
+
 ```bash
 pip install requests
