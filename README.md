@@ -1,7 +1,7 @@
 # BillTracer
 
 BillTracer is a research tool for analyzing how congressional bills change as they move through the legislative process.  
-It fetches two different versions of a bill from **GovInfo** and produces a side-by-side, section-aware comparison in HTML.
+It fetches two different versions of a bill from **GovInfo** and produces a side-by-side, section aware comparison in HTML.
 
 The viewer highlights what text was **added**, **removed**, or **modified**, and applies simple heuristics to flag provisions related to **funding**, **authority**, and **reporting**. This makes it easier to trace how appropriations or mandates evolve between drafts.
 
