@@ -4,6 +4,8 @@ BillTracer is a tool I built for the **Congressional Hackathon** to make it easi
 
 It fetches two different versions of a bill from **GovInfo** and produces a side-by-side, section-aware comparison in HTML. The viewer highlights what text was **added**, **removed** or **modified** and applies simple heuristics to flag provisions related to **funding**.
 
+Youtube Prototype Demo: https://youtu.be/PBa_G2kVW18?si=rLCRcPSMGERZGYrd
+
 ---
 
 ## Why I Made BillTracer
