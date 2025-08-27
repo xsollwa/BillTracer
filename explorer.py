@@ -376,7 +376,7 @@ def main():
     changes, stats, unchanged = summarize_changes(d1, d2)
     out_html = build_html(changes, stats, unchanged)
     (OUTPUT_DIR / "index.html").write_text(out_html, encoding="utf-8")
-    print("✅ Done. Open output/index.html in your browser.")
+    print("Done. Open output/index.html")
 
 if __name__ == "__main__":
     main()
