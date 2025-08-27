@@ -1,32 +1,29 @@
-#!/usr/bin/env python3
-# BillTracer — Bill Evolution Viewer (no external deps)
 # Reads data/bill_v1.txt and data/bill_v2.txt, writes output/index.html
 
 import re, html, difflib, datetime, json
 from pathlib import Path
 from typing import List, Dict, Tuple
 
-# ---------- Branding ----------
+# Branding: can be changed per bill
 BILL_ID  = "BillTracer — H.R. 748 (CARES Act vehicle)"
 STAGE_A  = "Introduced (IH)"
 STAGE_B  = "Enrolled (ENR)"
 FORCE_FULLTEXT = False     # set True to ignore sectioning and redline the whole doc
 SHOW_UNCHANGED = False     # default toggle when the page opens
-# -----------------------------
 
 DATA_DIR   = Path("data")
 OUTPUT_DIR = Path("output")
 V1_PATH    = DATA_DIR / "bill_v1.txt"
 V2_PATH    = DATA_DIR / "bill_v2.txt"
 
-# ---------- Text cleanup ----------
+# Text cleanup
 def sanitize_text(s: str) -> str:
     s = s.replace("\r\n", "\n").replace("\r", "\n").replace("\u00A0", " ")
     s = re.sub(r"[ \t]+", " ", s)
     s = re.sub(r" \s*([,.;:])", r"\1", s)
     s = re.sub(r"\(\s+", "(", s); s = re.sub(r"\s+\)", ")", s)
     s = re.sub(r"\[\s+", "[", s); s = re.sub(r"\s+\]", "]", s)
-    # unwrap within paragraphs (keep blank lines as paragraph breaks)
+
     out, buf = [], []
     for ln in s.split("\n"):
         t = ln.strip()
@@ -45,7 +42,7 @@ def sanitize_text(s: str) -> str:
 def load_text(path: Path) -> str:
     return sanitize_text(path.read_text(encoding="utf-8", errors="ignore"))
 
-# ---------- Structure detection ----------
+# Structure detection
 SEC_RE       = re.compile(r'^(?:SEC\.|Sec\.|SECTION|Section)\s+(\d+[A-Za-z\-]*)[.: ]', re.MULTILINE)
 TITLE_RE     = re.compile(r'^(?:TITLE\s+[IVXLC]+(?:\s*[\u2014—-].*)?)$', re.MULTILINE)
 DIVISION_RE  = re.compile(r'^(?:DIVISION\s+[A-Z](?:\s*[\u2014—-].*)?)$', re.MULTILINE)
@@ -87,7 +84,7 @@ def split_sections(raw: str) -> List[Dict]:
 def index_by_id(sections: List[Dict]) -> Dict[str, Dict]:
     return {s["sec_id"]: s for s in sections}
 
-# ---------- Diffing ----------
+# Diffing 
 TOKEN_RE = re.compile(r"\S+|\s+")
 def escape(s: str) -> str: return html.escape(s, quote=False)
 
@@ -108,7 +105,7 @@ def diff_words_preserve_ws(a: str, b: str) -> str:
             out.append(f"<del>{escape(A)}</del><ins>{escape(B)}</ins>")
     return "".join(out)
 
-# ---------- Heuristics & tags ----------
+# Heuristics & tags
 APPROPS_HINTS = re.compile(
     r'(\$\s?\d|\bappropriat(?:e|ion|ed|ions)\b|\bauthorized to be appropriated\b|'
     r'\btransfer\b|\bobligation\b|\bresciss|\boffset\b|\bgrant\b|\bfund(?:s|ing)?\b|'
@@ -126,7 +123,7 @@ def categorize_change(before: str, after: str) -> List[str]:
         tags.add("Reporting")
     return sorted(tags)
 
-# ---------- Summarize ----------
+# Summarize
 def summarize_changes(old_by_id: Dict[str, Dict], new_by_id: Dict[str, Dict]) -> Tuple[List[Dict], Dict[str,int], List[Dict]]:
     changes: List[Dict] = []
     unchanged: List[Dict] = []
@@ -168,7 +165,7 @@ def summarize_changes(old_by_id: Dict[str, Dict], new_by_id: Dict[str, Dict]) ->
     changes.sort(key=lambda x: (not x["is_approp"], x["sec_id"]))
     return changes, stats, unchanged
 
-# ---------- HTML ----------
+# HTML
 CSS = """
 :root { --stick: 98px; }
 *{box-sizing:border-box}
@@ -285,7 +282,7 @@ def build_html(change_log: List[Dict], stats: Dict[str,int], unchanged: List[Dic
             f"</section>"
         )
 
-    # unchanged (hidden by default unless toggled)
+    # unchanged
     for u in unchanged:
         blocks.append(
             f"<section class='block' id='{html.escape(u['sec_id'])}' "
@@ -360,7 +357,7 @@ def build_html(change_log: List[Dict], stats: Dict[str,int], unchanged: List[Dic
 """
     return html_doc
 
-# ---------- Main ----------
+# Main
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     if not V1_PATH.exists() or not V2_PATH.exists():
