@@ -1,4 +1,3 @@
-# fetch_bills.py — robust fetch using Congress.gov (if allowed) + GovInfo (bulk XML / content XML)
 import os, re, time, requests
 
 # ---- editable per bill ----
