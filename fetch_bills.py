@@ -1,6 +1,6 @@
 import os, re, time, requests
 
-# ---- editable per bill ----
+# editable per bill 
 CONGRESS = 116
 CHAMBER  = "house"   # "house" or "senate"
 BILL_NUM = 748
