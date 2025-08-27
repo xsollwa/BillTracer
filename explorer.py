@@ -8,8 +8,8 @@ from typing import List, Dict, Tuple
 BILL_ID  = "BillTracer — H.R. 748 (CARES Act vehicle)"
 STAGE_A  = "Introduced (IH)"
 STAGE_B  = "Enrolled (ENR)"
-FORCE_FULLTEXT = False     # set True to ignore sectioning and redline the whole doc
-SHOW_UNCHANGED = False     # default toggle when the page opens
+FORCE_FULLTEXT = False    
+SHOW_UNCHANGED = False   
 
 DATA_DIR   = Path("data")
 OUTPUT_DIR = Path("output")
