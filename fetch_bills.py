@@ -1,12 +1,12 @@
 import os, re, time, requests
 
-# editable per bill 
+# editable per bill: choose what bill and what versions you want to compare 
 CONGRESS = 116
 CHAMBER  = "house"   # "house" or "senate"
 BILL_NUM = 748
 VER_A    = "ih"      # ih, rh, eh, enr, ...
 VER_B    = "enr"
-# ---------------------------
+
 
 S = requests.Session()
 S.headers.update({
