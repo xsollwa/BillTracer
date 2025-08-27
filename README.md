@@ -6,13 +6,13 @@ It fetches two different versions of a bill from **GovInfo** and produces a side
 
 Youtube Prototype Demo: https://youtu.be/PBa_G2kVW18?si=rLCRcPSMGERZGYrd
 
----
+-
 
 ## Why I Made BillTracer
 
 Legislation often undergoes major edits as it moves from introduction to enrollment. Tracking those changes by hand is tedious and confusing, especially for congressional staff, students, advocates or anyone who isn’t a legal expert.  
 
-I made BillTracer because I wanted a **clear and approachable way to see how bills evolve**. My goal was to build something that encourages civic engagement, makes government processes less intimidating, and supports transparency.
+I made BillTracer because I wanted a **clearer way to see how bills evolve**. My goal was to build something that encourages civic engagement, makes government processes less intimidating, and supports transparency.
 
 ## How I Made It
 
@@ -32,7 +32,7 @@ I made BillTracer because I wanted a **clear and approachable way to see how bil
 - **Government data is messy**: APIs and documents don’t always follow a neat structure, but careful parsing can still make them usable.  
 - Tech + civics go hand in hand because even small projects can make the legislative process more transparent and accessible for everyone.  
 
----
+-
 
 ## Features
 
@@ -43,7 +43,7 @@ I made BillTracer because I wanted a **clear and approachable way to see how bil
 - **Funding summary** that highlights appropriation-related changes  
 - **Lightweight**: only requires Python and `requests`
 
----
+-
 ## To View to Bill of Your Choice 
 
 - Edit the bill information on the fetch script and add your bill information.
