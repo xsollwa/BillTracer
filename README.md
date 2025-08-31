@@ -6,6 +6,8 @@ It fetches two different versions of a bill from **GovInfo** and produces a side
 
 Youtube Prototype Demo: https://youtu.be/PBa_G2kVW18?si=rLCRcPSMGERZGYrd
 
+Playable Link: https://billtracer.onrender.com
+
 
 
 ## Why I Made BillTracer
